@@ -52,7 +52,7 @@ export const HelloWorld: React.FC = () => {
         setError(null);
       };
 
-      eventSource.onmessage = (event) => {
+      eventSource.onmessage = event => {
         console.log('Raw SSE event received:', event);
         console.log('Event data:', event.data);
         try {
@@ -70,16 +70,16 @@ export const HelloWorld: React.FC = () => {
         }
       };
 
-      eventSource.onerror = (event) => {
+      eventSource.onerror = event => {
         console.error('SSE connection error:', event);
         eventSource.close();
-        
+
         if (retryCount < maxRetries) {
           setConnectionStatus('reconnecting');
           const delay = getRetryDelay(retryCount);
-          
+
           console.log(`Reconnecting in ${delay}ms (attempt ${retryCount + 1}/${maxRetries})`);
-          
+
           reconnectTimeoutRef.current = setTimeout(() => {
             setRetryCount(prev => prev + 1);
             connect();
@@ -89,7 +89,6 @@ export const HelloWorld: React.FC = () => {
           setError(`Connection failed after ${maxRetries} attempts`);
         }
       };
-
     } catch (connectionError) {
       console.error('Failed to create EventSource:', connectionError);
       setConnectionStatus('disconnected');
@@ -151,11 +150,13 @@ export const HelloWorld: React.FC = () => {
 
     return (
       <div className="flex items-center gap-2 mb-4">
-        <div className={`w-3 h-3 rounded-full ${getStatusColor()} ${
-          connectionStatus === 'connecting' || connectionStatus === 'reconnecting' 
-            ? 'animate-pulse' 
-            : ''
-        }`}></div>
+        <div
+          className={`w-3 h-3 rounded-full ${getStatusColor()} ${
+            connectionStatus === 'connecting' || connectionStatus === 'reconnecting'
+              ? 'animate-pulse'
+              : ''
+          }`}
+        ></div>
         <span className="text-sm font-medium">{getStatusText()}</span>
         {connectionStatus === 'disconnected' && (
           <button
@@ -172,7 +173,7 @@ export const HelloWorld: React.FC = () => {
   return (
     <div className="p-4 bg-gray-100 rounded-lg shadow-md">
       <h2 className="text-2xl font-bold mb-4">Hello World Endpoint (SSE)</h2>
-      
+
       <ConnectionIndicator />
 
       {error && (
@@ -194,9 +195,7 @@ export const HelloWorld: React.FC = () => {
           <p className="text-sm text-gray-600">
             <strong>Timestamp:</strong> {new Date(helloData.timestamp).toLocaleString()}
           </p>
-          <p className="text-xs text-gray-500">
-            Updates automatically every 5 seconds
-          </p>
+          <p className="text-xs text-gray-500">Updates automatically every 5 seconds</p>
         </div>
       ) : (
         connectionStatus === 'connecting' && (

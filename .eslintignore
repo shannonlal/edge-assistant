@@ -1,8 +1,0 @@
-node_modules
-.next
-build
-dist
-coverage
-public
-*.config.js
-next-env.d.ts

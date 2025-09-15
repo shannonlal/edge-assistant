@@ -19,7 +19,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   res.writeHead(200, {
     'Content-Type': 'text/event-stream',
     'Cache-Control': 'no-cache, no-transform',
-    'Connection': 'keep-alive',
+    Connection: 'keep-alive',
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Cache-Control',
     'Access-Control-Allow-Methods': 'GET',
@@ -30,7 +30,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     message: 'Hello World - Connected!',
     timestamp: new Date().toISOString(),
   };
-  
+
   console.log('Sending initial data:', initialData);
   res.write(`data: ${JSON.stringify(initialData)}\n\n`);
 
@@ -40,7 +40,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       message: 'Hello World',
       timestamp: new Date().toISOString(),
     };
-    
+
     try {
       console.log('Sending periodic data:', data);
       res.write(`data: ${JSON.stringify(data)}\n\n`);
@@ -63,7 +63,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   });
 
   // Handle connection errors
-  res.on('error', (error) => {
+  res.on('error', error => {
     console.log('Response error, cleaning up interval:', error);
     clearInterval(interval);
   });
