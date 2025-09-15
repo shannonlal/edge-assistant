@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+/* Button Styles */
+.btn {
+  @apply inline-flex items-center justify-center px-6 py-2.5 rounded-full font-medium transition-colors duration-200;
+}
+.btn-primary {
+  @apply inline-flex items-center justify-center px-6 py-2.5 rounded-full font-medium transition-colors duration-200 bg-blue-500 text-white hover:bg-blue-600 shadow;
+}
+.btn-secondary {
+  @apply inline-flex items-center justify-center px-6 py-2.5 rounded-full font-medium transition-colors duration-200 bg-gray-500 text-white hover:bg-gray-600;
+}
+
+/* Dropdown Styles */
+.dropdown {
+  @apply relative inline-block;
+}
+.dropdown-content {
+  @apply absolute z-50 mt-2 w-56 bg-white shadow-lg border border-gray-200 focus:outline-none rounded-md;
+}
+.dropdown-item {
+  @apply block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 cursor-pointer;
+}
+
+/* Input Styles */
+.input {
+  @apply block w-full rounded-md border border-gray-300 shadow focus:border-blue-500 focus:outline-none text-sm;
+}
+
+/* Card Styles */
+.card {
+  @apply bg-white rounded-lg shadow-md p-6;
+}
